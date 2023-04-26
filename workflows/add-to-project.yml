@@ -1,0 +1,47 @@
+#   OpenATO Issue Syncs
+#
+#       Based on: https://github.com/actions/add-to-project
+name: Add Issues to OpenATO Projects
+
+on:
+    issues:
+        types:
+            - opened
+            - labeled
+    pull_request:
+        types:
+            - opened
+            - labeled
+
+jobs:
+    add-issues-to-project:
+        name: Add Issues to Projects
+        runs-on: ubuntu-latest
+        steps:
+            - name: Add New Issues to Issues Project
+              uses: actions/add-to-project@v0.4.0
+              with:
+                project-url: https://github.com/orgs/OpenATO/projects/1
+                labeled: 🧚 Feature Request
+                label-operator: NOT
+
+            - name: Add Feature Requests to Roadmap
+              uses: actions/add-to-project@v0.4.0
+              with:
+                project-url: https://github.com/orgs/OpenATO/projects/4
+                labeled: 🧚 Feature Request
+                label-operator: OR
+
+            - name: Add Frontend to Frontend Project
+              uses: actions/add-to-project@v0.4.0
+              with:
+                project-url: https://github.com/orgs/OpenATO/projects/7
+                labeled: 🖼️ Front End
+                label-operator: OR
+
+            - name: Add Demo to Demo
+              uses: actions/add-to-project@v0.4.0
+              with:
+                project-url: https://github.com/orgs/OpenATO/projects/8
+                labeled: 🧑‍🏫 Demo
+                label-operator: OR
